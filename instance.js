@@ -24,8 +24,6 @@ const run = async function () {
         Key: uuidv4() + '.txt',
         Body: number.toString()
       });
-      subsegment.addAnnotation("data", JSON.stringify(response));
-      subsegment.close();
       console.log(util.inspect(response, false, null, true));
       response = await sqs.deleteMessage({
         QueueUrl: 'https://sqs.us-east-1.amazonaws.com/864613434505/demo-xray',
