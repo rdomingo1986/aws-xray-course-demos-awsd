@@ -1,20 +1,15 @@
 const { S3 } = require('@aws-sdk/client-s3');
 const { SQS } = require('@aws-sdk/client-sqs');
 
-// const AWSXRay = require('aws-xray-sdk-core');
-
 const { v4: uuidv4 } = require('uuid');
 
 const util = require('util');
 
-const s3 = AWSXRay.captureAWSv3Client(new S3());
+const s3 = new S3();
 
-const sqs = AWSXRay.captureAWSv3Client(new SQS());
+const sqs = new SQS();
 
 const run = async function () {
-  // const segment = AWSXRay.getSegment();
-  
-  // const subsegment = segment.addNewSubsegment("Result");
   try {
     var response = await sqs.receiveMessage({
       QueueUrl: 'https://sqs.us-east-1.amazonaws.com/864613434505/demo-xray',
